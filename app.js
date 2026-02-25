@@ -1,0 +1,21 @@
+console.log("app file loaded...")
+
+// const userName = require("./users")
+// console.log("User Name from user.js : ",userName)
+// const userAge = require("./users")
+// console.log("User Age from user.js : ",userAge)
+const user = require("./users")
+console.log("User : ",user)
+console.log("User Name from user.js : ",user.userName)
+console.log("User Age from user.js : ",user.userAge)
+ans = user.userData(100)
+console.log("Ans : ",ans)
+console.log("Hello from node js")
+var x = 100
+console.log("X = ",x)
+
+const employee = require("./employee")
+console.log("Employee : ",employee)
+console.log("Employee Name : ",employee.empName)
+console.log("Employee Salary : ",employee.empSalary)
+employee.empData()
