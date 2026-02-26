@@ -1,21 +1,106 @@
-console.log("app file loaded...")
+const express = require("express");
+const app = express();
 
-// const userName = require("./users")
-// console.log("User Name from user.js : ",userName)
-// const userAge = require("./users")
-// console.log("User Age from user.js : ",userAge)
-const user = require("./users")
-console.log("User : ",user)
-console.log("User Name from user.js : ",user.userName)
-console.log("User Age from user.js : ",user.userAge)
-ans = user.userData(100)
-console.log("Ans : ",ans)
-console.log("Hello from node js")
-var x = 100
-console.log("X = ",x)
+app.get("/test",(req,res) => {
+    console.log("Test api called...");
+    res.send("Test api called...");
+});
 
-const employee = require("./employee")
-console.log("Employee : ",employee)
-console.log("Employee Name : ",employee.empName)
-console.log("Employee Salary : ",employee.empSalary)
-employee.empData()
+//Users Api
+
+const user = {
+    id : 101,
+    name : "Mansi",
+    age : 23,
+    salary : 20000
+};
+
+app.get("/user",(req,res) => {
+    res.json({
+        message: "user fetched successfully!",
+        data: user
+    });
+});
+
+const users = [
+    {id : 1,name : "Mansi",age : 23},
+    {id : 2,name : "Isha",age : 24},
+    {id : 3,name : "Raj",age : 25},
+    {id : 4,name : "Amit",age : 26},
+    {id : 5,name : "Jay",age : 27}
+];
+
+app.get("/users",(req,res) => {
+    res.json({
+        message: "user data fetched successfully!",
+        data: users
+    });
+});
+
+app.get("/user/:id",(req,res) =>{
+    console.log(req.params);
+    console.log(req.params.id);
+    const user = users.find((u) => u.id == req.params.id);
+    if (user) {
+        res.json({
+            message: "User fetched successfully!...",
+            data: user
+        });
+    } else {
+        res.json({
+            message: `User with id ${req.params.id} is not exist`
+        });   
+    }
+});
+
+
+//Employees Api
+
+const employee = {
+    id : 101,
+    name : "Mansi",
+    salary : 20000
+};
+
+app.get("/employee",(req,res) => {
+    res.json({
+        message: "employee fetched successfully!",
+        data: employee
+    });
+});
+
+const employees = [
+    {id : 1,name : "Mansi",salary : 23000},
+    {id : 2,name : "Isha",salary : 24000},
+    {id : 3,name : "Raj",salary : 25000},
+    {id : 4,name : "Amit",salary : 26000},
+    {id : 5,name : "Jay",salary : 27000}
+];
+
+app.get("/employees",(req,res) => {
+    res.json({
+        message: "employee data fetched successfully!",
+        data: employees
+    });
+});
+
+app.get("/employee/:id",(req,res) =>{
+    console.log(req.params);
+    console.log(req.params.id);
+    const employee = employees.find((e) => e.id == req.params.id);
+    if (employee) {
+        res.json({
+            message: "Employee fetched successfully!...",
+            data: employee
+        });
+    } else {
+        res.json({
+            message: `Employee with id ${req.params.id} is not exist`
+        });   
+    }
+});
+
+const PORT = 3000;
+app.listen(PORT, () => {
+    console.log(`server started on port ${PORT}`)
+});
