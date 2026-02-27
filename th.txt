@@ -1,3 +1,106 @@
+app.get("/test",(req,res) => {
+    console.log("Test api called...");
+    res.send("Test api called...");
+});
+
+//Users Api
+
+const user = {
+    id : 101,
+    name : "Mansi",
+    age : 23,
+    salary : 20000
+};
+
+app.get("/user",(req,res) => {
+    res.json({
+        message: "user fetched successfully!",
+        data: user
+    });
+});
+
+const users = [
+    {id : 1,name : "Mansi",age : 23},
+    {id : 2,name : "Isha",age : 24},
+    {id : 3,name : "Raj",age : 25},
+    {id : 4,name : "Amit",age : 26},
+    {id : 5,name : "Jay",age : 27}
+];
+
+app.get("/users",(req,res) => {
+    res.json({
+        message: "user data fetched successfully!",
+        data: users
+    });
+});
+
+app.get("/user/:id",(req,res) =>{
+    console.log(req.params);
+    console.log(req.params.id);
+    const user = users.find((u) => u.id == req.params.id);
+    if (user) {
+        res.json({
+            message: "User fetched successfully!...",
+            data: user
+        });
+    } else {
+        res.json({
+            message: `User with id ${req.params.id} is not exist`
+        });   
+    }
+});
+
+
+//Employees Api
+
+const employee = {
+    id : 101,
+    name : "Mansi",
+    salary : 20000
+};
+
+app.get("/employee",(req,res) => {
+    res.json({
+        message: "employee fetched successfully!",
+        data: employee
+    });
+});
+
+const employees = [
+    {id : 1,name : "Mansi",salary : 23000},
+    {id : 2,name : "Isha",salary : 24000},
+    {id : 3,name : "Raj",salary : 25000},
+    {id : 4,name : "Amit",salary : 26000},
+    {id : 5,name : "Jay",salary : 27000}
+];
+
+app.get("/employees",(req,res) => {
+    res.json({
+        message: "employee data fetched successfully!",
+        data: employees
+    });
+});
+
+app.get("/employee/:id",(req,res) =>{
+    console.log(req.params);
+    console.log(req.params.id);
+    const employee = employees.find((e) => e.id == req.params.id);
+    if (employee) {
+        res.json({
+            message: "Employee fetched successfully!...",
+            data: employee
+        });
+    } else {
+        res.json({
+            message: `Employee with id ${req.params.id} is not exist`
+        });   
+    }
+});
+
+
+
+
+----------------------------------------------------------------
 frontend -->
 backend 
   
@@ -41,3 +144,23 @@ npm i nodemon --dev
 
 server start 
 nodemon app.js
+
+src
+ controllers
+ models
+ utils
+ routes
+<-------------------------------> 
+
+server --> app.js -->routes -->controllers[res-->send] -->model
+
+controllers: UserController --> CRUD....business logic
+routes : UserRoutes --> controller bind --> url --> controller -->function
+
+util : --> reusable...
+models : mongodb database collection -> 1 model -->
+
+
+Naming Con:
+UserController
+user_controller
