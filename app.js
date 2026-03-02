@@ -1,8 +1,11 @@
 const express = require("express");
 const app = express();
 
-const userRoutes = require("./src/routes/UserRoutes");
-app.use(userRoutes);
+const dbConnection = require("./src/utils/DBConnection");
+dbConnection();
+
+const productRoutes = require("./src/routes/ProductRoutes");
+app.use("/prod",productRoutes);
 
 const employeeRoutes = require("./src/routes/EmployeeRoutes");
 app.use(employeeRoutes);
