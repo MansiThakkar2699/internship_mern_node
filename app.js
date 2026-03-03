@@ -9,6 +9,18 @@ dbConnection();
 const productRoutes = require("./src/routes/ProductRoutes");
 app.use("/prod",productRoutes);
 
+const bookRoutes = require("./src/routes/BookRoutes");
+app.use("/book",bookRoutes);
+
+const cityRoutes = require("./src/routes/CityRoutes");
+app.use("/city",cityRoutes);
+
+const stateRoutes = require("./src/routes/StateRoutes");
+app.use("/state",stateRoutes);
+
+const categoryRoutes = require("./src/routes/CategoryRoutes");
+app.use("/cat",categoryRoutes);
+
 const employeeRoutes = require("./src/routes/EmployeeRoutes");
 app.use(employeeRoutes);
 
