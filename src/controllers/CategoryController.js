@@ -1,45 +1,88 @@
 const categorySchema = require("../models/CategoryModel")
 
 const createCategory = async (req,res) => {
-    const categories = await categorySchema.create(req.body)
-    res.status(201).json({
-        message: "Category Created Successfully",
-        data: categories
-    })
+    try {
+        const categories = await categorySchema.create(req.body)
+        res.status(201).json({
+            message: "Category Created Successfully",
+            data: categories
+        })
+    } catch (error) {
+        res.json({
+            message: "getting error while creating category",
+            data: error
+        })
+    }
 }
 
 const getAllCategories = async (req,res) => {
-    const categories = await categorySchema.find();
-    res.json({
-        message: "All categories fetched",
-        data: categories
-    })
+    try {
+        const categories = await categorySchema.find();
+        res.json({
+            message: "All categories fetched",
+            data: categories
+        })
+    } catch (error) {
+        res.json({
+            message: "getting error while fetching categories",
+            data: error
+        })
+    }
 }
 
 const getCategoryByID = async (req,res) => {
-    const foundCategory = await categorySchema.findById(req.params.id)
-    if(foundCategory){
+    try {
+        const foundCategory = await categorySchema.findById(req.params.id)
+        if(foundCategory){
+            res.json({
+                message: "Category found",
+                data: foundCategory
+            })
+        }else{
+            res.json({
+                message: "Category not found"
+            })
+        }
+    } catch (error) {
         res.json({
-            message: "Category found",
-            data: foundCategory
-        })
-    }else{
-        res.json({
-            message: "Category not found"
+            message: "getting error while fetching category",
+            data: error
         })
     }
 }
 
 const deleteCategory = async (req,res) => {
-    const deletedCategory = await categorySchema.findByIdAndDelete(req.params.id)
-    if(deletedCategory){
+    try {
+        const deletedCategory = await categorySchema.findByIdAndDelete(req.params.id)
+        if(deletedCategory){
+            res.json({
+                message: "Category deleted successfully",
+                data: deletedCategory
+            })
+        }else{
+            res.json({
+                message: "Category not found"
+            })
+        }
+    } catch (error) {
         res.json({
-            message: "Category deleted successfully",
-            data: deletedCategory
+            message: "getting error while deleting category",
+            data: error
         })
-    }else{
+    }
+}
+
+const updateCategory = async (req,res) => {
+    try {
+        const updatedCategory = await categorySchema.findByIdAndUpdate(req.params.id,req.body,{new: true})
         res.json({
-            message: "Category not found"
+            message: "Category Updated Successfully",
+            data: updatedCategory
+        })   
+    } catch (error) {
+        res.json({
+            message: "getting error while updating category",
+            data: error
         })
     }
 }
@@ -48,5 +91,6 @@ module.exports = {
     createCategory,
     getAllCategories,
     getCategoryByID,
-    deleteCategory
+    deleteCategory,
+    updateCategory
 }
